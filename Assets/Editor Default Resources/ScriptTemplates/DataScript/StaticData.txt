@@ -1,0 +1,19 @@
+using System;
+using O2un.Data;
+using UnityEngine;
+
+public class #SCRIPTNAME# : StaticData
+{
+    //#VALUESTART#
+    //#VALUESEND#
+
+    public override void Link()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void Set()
+    {
+        throw new System.NotImplementedException();
+    }
+}

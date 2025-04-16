@@ -34,5 +34,10 @@ namespace O2un.Core.Utils
 
             return Enum.GetValues(type).Cast<object>().Last();
         }
+
+        public static int IndexOfEnd(this string str, string find)
+        {
+            return str.IndexOf(find) + find.Length;
+        }
     }
 }

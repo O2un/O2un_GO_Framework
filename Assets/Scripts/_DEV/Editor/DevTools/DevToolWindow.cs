@@ -1,3 +1,4 @@
+using O2un.Data;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
@@ -24,6 +25,8 @@ public class DevToolWindow : OdinMenuEditorWindow
         tree.Config.DrawSearchToolbar = true;
         tree.DefaultMenuStyle = OdinMenuStyle.TreeViewStyle;
         
+        tree.AddAssetAtPath("Tools/Data List", DataConfig.Instance.GetPath());
+        tree.Add("Tools/Data Tool", new DataTool());
         tree.AddAssetAtPath("Tools/Enum Tool", EnumTool.Instance.GetPath());
         //tree.Add("Tools/Navigation Tool", new NaviTool());
         return tree;
