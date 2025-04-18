@@ -1,21 +1,25 @@
 using System;
-using O2un.Data;
 using UnityEngine;
 
-public class TestStaticData : StaticData
+namespace O2un.Data
 {
-    //#VALUESTART#
+    [Serializable]    
+    public class TestStaticData : StaticData
+    {
+//#VALUESTART#
 		private String _name;
 		public String Name => _name;
-  //#VALUESEND#
 
-    public override void Link()
-    {
-        throw new System.NotImplementedException();
-    }
+//#VALUESEND#
 
-    public override void Set()
-    {
-        throw new System.NotImplementedException();
+        public override void Link()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Set()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

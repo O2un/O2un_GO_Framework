@@ -1,19 +1,38 @@
-using O2un.Data;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using GameCommonTypes;
+using O2un.Core.Excel;
+using O2un.Core.Utils;
 
-public class TestStaticDataManager : StaticDataManager<TestStaticDataManager, TestStaticData>
+namespace O2un.Data
 {
-    protected override void LinkXXX()
+    public class TestStaticDataManager : StaticDataManager<TestStaticDataManager, TestStaticData>
     {
-        throw new System.NotImplementedException();
-    }
+        protected override void LoadFromExcel()
+        {
+#if UNITY_EDITOR
+            Dictionary<UniqueKey64, TestStaticData> loadDictionary = new();
+            if (false == Excel.Load<TestStaticData>(out var result))
+            {
+                LogHelper.Dev("TestStaticData 데이터 로드 실패", LogHelper.LogLevel.Error);
+            }
 
-    protected override void LoadFromExcel()
-    {
-        throw new System.NotImplementedException();
-    }
+            result.ForEach((d) =>
+            {
+                loadDictionary.TryAdd(d.Key, d);
+            });
+            DataList = loadDictionary.ToImmutableDictionary();
+#endif
+        }
 
-    protected override void SetXXX()
-    {
-        throw new System.NotImplementedException();
+        protected override void SetXXX()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override void LinkXXX()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
