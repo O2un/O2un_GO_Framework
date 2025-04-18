@@ -26,7 +26,8 @@
 8. **[NLog](https://github.com/NLog/NLog)** → 유연한 로깅 기능을 제공하는 로그 관리 라이브러리
 9. **[System.Collections.Immutable](https://www.nuget.org/packages/System.Collections.Immutable/)** → 읽기 전용(Immutable) 컬렉션을 제공하는 .NET 라이브러리
 10. **[Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)** → JSON 직렬화 및 역직렬화를 위한 라이브러리
-11. **[NPOI](https://github.com/nissl-lab/npoi)** → Excel 파일의 읽기 및 쓰기를 지원하는 .NET 라이브러리
+10. **[System.Text.Json](https://www.nuget.org/packages/System.Text.Json/)** → JSON 직렬화 및 역직렬화를 위한 라이브러리
+12. **[NPOI](https://github.com/nissl-lab/npoi)** → Excel 파일의 읽기 및 쓰기를 지원하는 .NET 라이브러리
 
 
 유료 라이브러리

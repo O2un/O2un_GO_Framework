@@ -55,8 +55,8 @@ namespace O2un.Data
                 values3_1.AppendLine($"\t\t\t{m.Name}.Instance.Link();");
             });
             //스트링 테이블
-            values.AppendLine($"\t\t\tStringTableManager.Instance.LoadFromExcel();");
-            values2.AppendLine($"\t\t\tStringTableManager.Instance.SaveToBinary();");
+            // values.AppendLine($"\t\t\tStringTableManager.Instance.LoadFromExcel();");
+            // values2.AppendLine($"\t\t\tStringTableManager.Instance.SaveToBinary();");
 
             template = template.Replace(LOAD, values.ToString());
             template = template.Replace(SAVE, values2.ToString());
@@ -97,8 +97,8 @@ namespace O2un.Data
             });
             values4.Replace(',',' ',values4.Length-5,4);
 
-            values.AppendLine($"\t\t\tStringTableManager.Instance.Load(true);");
-            values2.AppendLine($"\t\t\tStringTableManager.Instance.Load(true, true);");
+            // values.AppendLine($"\t\t\tStringTableManager.Instance.Load(true);");
+            // values2.AppendLine($"\t\t\tStringTableManager.Instance.Load(true, true);");
 
             template = template.Replace(BINARYLOAD, values.ToString());
             template = template.Replace(ADRESSLOAD, values2.ToString());
@@ -125,21 +125,21 @@ namespace O2un.Data
         [Button(buttonSize: 50 , name: "엑셀 데이터 로드")]
         private void EditorDataLoadTest()
         {
-            // EditorDataLoader.LoadFromExcel();
+            EditorDataLoader.LoadFromExcel();
         }
 
         [ButtonGroup("LOAD")]
         [Button(buttonSize: 50 , name: "바이너리 데이터 로드")]
         private void RuntimeDataLoadTest()
         {
-            // RuntimeDataLoader.LoadFromBinary();
+            RuntimeDataLoader.LoadFromBinary();
         }
 
         [ButtonGroup("LOAD")]
         [Button(buttonSize: 50 , name: "어드레서블 데이터 로드")]
         private void AddressableLoad()
         {
-        //    RuntimeDataLoader.LoadFromAddressable();
+            RuntimeDataLoader.LoadFromAddressable();
         }
 
         [OnInspectorGUI] private void Space3() { GUILayout.Space(20); }
@@ -147,7 +147,7 @@ namespace O2un.Data
         [Button(buttonSize: 50 , name: "바이너리 저장")]
         private void SaveToBinary()
         {
-            // EditorDataLoader.SaveToBinary();
+            EditorDataLoader.SaveToBinary();
         }
 
         [OnInspectorGUI] private void Space4() { GUILayout.Space(20); }

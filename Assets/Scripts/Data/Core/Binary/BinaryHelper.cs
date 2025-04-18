@@ -2,15 +2,16 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
 using GameCommonTypes;
-using Newtonsoft.Json;
 using UnityEngine;
 
 namespace O2un.Data.Binary
 {
     public static class BinaryHelper
     {
-        private static string password = "o2!2510UnEnt@";
+        //NOTE 비밀번호는 16자
+        private static string password = "o2!2510UnEnt@sib";
         private static readonly string KEY = password.Substring(0, 128 / 8);
 
         public static BinaryWriter SaveToBinary(string path, bool isEncrypt = true)
@@ -89,12 +90,13 @@ namespace O2un.Data.Binary
             }
         }
 
+        // NOTE UniqueKey64 나 특정 타입 Serialize시 문제 발생으로 Netonsoft.Json 대신 System.Text.Json 사용 정확한 이유 파악은 못함
         public static T Read<T>(this BinaryReader br)
         {
             var len = br.ReadInt32();
             var bytes = br.ReadBytes(len);
 
-            return JsonConvert.DeserializeObject<T>(Encoding.UTF8.GetString(bytes));
+            return (T)JsonSerializer.Deserialize(bytes, typeof(T));
         }
 
         public static object Read(this BinaryReader br, Type type)
@@ -102,22 +104,19 @@ namespace O2un.Data.Binary
             var len = br.ReadInt32();
             var bytes = br.ReadBytes(len);
 
-            return JsonConvert.DeserializeObject(Encoding.UTF8.GetString(bytes), type);
+            return JsonSerializer.Deserialize(bytes, type);
         }
 
         public static void Write<T>(this BinaryWriter bw, T obj)
         {
-            var str = JsonConvert.SerializeObject(obj);
-            byte[] bytes = Encoding.UTF8.GetBytes(str);
+            var bytes = JsonSerializer.SerializeToUtf8Bytes(obj);
             bw.Write(bytes.Length);
             bw.Write(bytes);
         }
         
         public static void Write(this BinaryWriter bw, UniqueKey64 obj)
         {
-            var str = JsonConvert.SerializeObject(obj);
-            byte[] bytes = Encoding.UTF8.GetBytes(str);
-
+            var bytes = JsonSerializer.SerializeToUtf8Bytes(obj);
             bw.Write(bytes.Length);
             bw.Write(bytes);
         }

@@ -1,6 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using UnityEngine;
 
 namespace GameCommonTypes
@@ -150,6 +150,7 @@ namespace GameCommonTypes
         // public static implicit operator UniqueKey64(ulong key) => new UniqueKey64(key);
         #endregion
 
+        //NOTE Newtonsoft.Json에서 Serialize시 UniqueKey64, UniqueKey32 타입을 지원하지 않아서 System.Text.Json 사용
         [JsonConstructor]
         public UniqueKey64(uint lower, uint upper, ulong raw)
         {
