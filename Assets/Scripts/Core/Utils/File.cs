@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Sirenix.Utilities;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -23,10 +22,10 @@ namespace O2un.Core.Utils
         {
             List<T> list = new();
             var guids = AssetDatabase.FindAssets($"t:{typeof(T).Name}", path);
-            guids.ForEach((guid) =>
+            foreach (var guid in guids)
             {
                 list.Add((T)AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(guid), typeof(T)));
-            });
+            };
 
             return list;
         }
@@ -36,13 +35,13 @@ namespace O2un.Core.Utils
             List<T> list = new();
 
             var objs = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(asset));
-            objs.ForEach((o) =>
+            foreach (var o in objs)
             {
                 if (o is T)
                 {
                     list.Add(o as T);
                 }
-            });
+            };
 
             return list;
         }

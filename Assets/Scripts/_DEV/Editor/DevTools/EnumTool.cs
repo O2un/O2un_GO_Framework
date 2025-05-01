@@ -1,7 +1,10 @@
 using System.Text;
 using O2un.Config;
-using Sirenix.OdinInspector;
 using UnityEngine;
+
+#if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+#endif
 
 [O2un.Config.GlobalConfig]
 public class EnumTool : ConfigHelper<EnumTool>
@@ -12,15 +15,22 @@ public class EnumTool : ConfigHelper<EnumTool>
         layers = UnityEditorInternal.InternalEditorUtility.layers;
     }
 
+#if ODIN_INSPECTOR
     [BoxGroup("유니티 태그 레이어")]
     [ReadOnly,ShowInInspector,OnInspectorGUI("ShowInspector")]
+#endif
     string[] tags;
 
+#if ODIN_INSPECTOR
     [BoxGroup("유니티 태그 레이어")]
     [ReadOnly,ShowInInspector,OnInspectorGUI("ShowInspector")]
+#endif
     string[] layers;
+
+#if ODIN_INSPECTOR
     [BoxGroup("유니티 태그 레이어")]
     [Button(name: "Tag & Layer Regeneration")]
+#endif
     private void TagLayerGenerator()
     {
         StringBuilder stb = new();

@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using O2un.Config;
 using O2un.Core.Utils;
-using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
+
+#if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+#endif
 
 [O2un.Config.GlobalConfig]
 public class DataConfig : ConfigHelper<DataConfig>
@@ -30,10 +33,14 @@ public class DataConfig : ConfigHelper<DataConfig>
         
     }
 
+#if ODIN_INSPECTOR
     [FolderPath]
+#endif
     public string _dataPath = "Assets/DataTable/.RawData";
     
+#if ODIN_INSPECTOR
     [ReadOnly]
+#endif
     public List<ExcelInfo> DataInfoList = new();
 
     public void Clear()

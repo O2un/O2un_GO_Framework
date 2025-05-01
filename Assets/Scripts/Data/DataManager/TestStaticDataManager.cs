@@ -17,10 +17,10 @@ namespace O2un.Data
                 LogHelper.Dev("TestStaticData 데이터 로드 실패", LogHelper.LogLevel.Error);
             }
 
-            result.ForEach((d) =>
+            foreach (var d in result)
             {
                 loadDictionary.TryAdd(d.Key, d);
-            });
+            }
             DataList = loadDictionary.ToImmutableDictionary();
 #endif
         }

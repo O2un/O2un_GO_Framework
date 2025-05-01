@@ -1,20 +1,26 @@
 #if UNITY_EDITOR
+using System;
 using System.IO;
 using System.Linq;
 using System.Text;
 using O2un.Core.Excel;
-using Sirenix.OdinInspector;
-using Sirenix.Utilities;
 using UnityEditor;
 using UnityEngine;
+
+#if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+using Sirenix.Utilities;
+#endif
 
 namespace O2un.Data 
 {
     public class DataTool
     {
+#if ODIN_INSPECTOR
         [OnInspectorGUI] private void Space1() { GUILayout.Space(20); }
         [ButtonGroup("REGEN")]
         [Button(buttonSize:50, name: "데이터 스크립트 생성")]
+#endif
         void DataScriptGenerate()
         {
             Excel.CreateScriptAllData();
@@ -30,8 +36,10 @@ namespace O2un.Data
         public static readonly string WAIT = "#WAIT#";
 
         public static readonly string editorTemplate = "Assets/Editor Default Resources/ScriptTemplates/DataScript/EditorDataLoader.txt";
+#if ODIN_INSPECTOR
         [ButtonGroup("REGEN")]
         [Button(buttonSize: 50 , name: "데이터 로드 스크립트 생성")]
+#endif
         private void EditorLoaderScriptGenerate()
         {
             string template;
@@ -40,20 +48,27 @@ namespace O2un.Data
                 template = sr.ReadToEnd();
             }
             
+#if ODIN_INSPECTOR
             var temp = AssemblyUtilities.GetTypes(AssemblyCategory.Scripts)
                         .Where(t => t.IsClass && typeof(IStaticDataManager).IsAssignableFrom(t) && !t.IsAbstract);
+#else
+            var temp = AppDomain.CurrentDomain.GetAssemblies()
+                        .SelectMany(assembly => assembly.GetTypes())
+                        .Where(t => t.IsClass && typeof(IStaticDataManager).IsAssignableFrom(t) && !t.IsAbstract);
+#endif
     
             StringBuilder values = new();
             StringBuilder values2 = new();
             StringBuilder values3_0 = new();
             StringBuilder values3_1 = new();
 
-            temp.ForEach((m)=>{
+            foreach (var m in temp)
+            {
                 values.AppendLine($"\t\t\t{m.Name}.Instance.Load();");
                 values2.AppendLine($"\t\t\t{m.Name}.Instance.SaveToBinary();");
                 values3_0.AppendLine($"\t\t\t{m.Name}.Instance.Set();");
                 values3_1.AppendLine($"\t\t\t{m.Name}.Instance.Link();");
-            });
+            };
             //스트링 테이블
             // values.AppendLine($"\t\t\tStringTableManager.Instance.LoadFromExcel();");
             // values2.AppendLine($"\t\t\tStringTableManager.Instance.SaveToBinary();");
@@ -79,8 +94,14 @@ namespace O2un.Data
                 template = sr.ReadToEnd();
             }
             
+#if ODIN_INSPECTOR
             var temp = AssemblyUtilities.GetTypes(AssemblyCategory.Scripts)
                         .Where(t => t.IsClass && typeof(IStaticDataManager).IsAssignableFrom(t) && !t.IsAbstract);
+#else
+            var temp = AppDomain.CurrentDomain.GetAssemblies()
+                        .SelectMany(assembly => assembly.GetTypes())
+                        .Where(t => t.IsClass && typeof(IStaticDataManager).IsAssignableFrom(t) && !t.IsAbstract);
+#endif
     
             StringBuilder values = new();
             StringBuilder values2 = new();
@@ -88,13 +109,14 @@ namespace O2un.Data
             StringBuilder values3_1 = new();
             StringBuilder values4 = new();
             
-            temp.ForEach((m)=>{
+            foreach (var m in temp)
+            {
                 values.AppendLine($"\t\t\t{m.Name}.Instance.Load(true);");
                 values2.AppendLine($"\t\t\t{m.Name}.Instance.Load(true, true);");
                 values3_0.AppendLine($"\t\t\t{m.Name}.Instance.Set();");
                 values3_1.AppendLine($"\t\t\t{m.Name}.Instance.Link();");
                 values4.AppendLine($"\t\t\t\t{m.Name}.Instance.WaitForLoaded(),");
-            });
+            };
             values4.Replace(',',' ',values4.Length-5,4);
 
             // values.AppendLine($"\t\t\tStringTableManager.Instance.Load(true);");
@@ -113,46 +135,58 @@ namespace O2un.Data
             AssetDatabase.Refresh();
         }
 
+#if ODIN_INSPECTOR
         [ButtonGroup("REGEN")]
         [Button(buttonSize:50, name: "엑셀 리스트 리로드")]
+#endif
         void ExcelListRefesh()
         {
             Excel.RefreshExcelList(true);
         }
 
+#if ODIN_INSPECTOR
         [OnInspectorGUI] private void Space2() { GUILayout.Space(20); }
         [ButtonGroup("LOAD")]
         [Button(buttonSize: 50 , name: "엑셀 데이터 로드")]
+#endif
         private void EditorDataLoadTest()
         {
             EditorDataLoader.LoadFromExcel();
         }
 
+#if ODIN_INSPECTOR
         [ButtonGroup("LOAD")]
         [Button(buttonSize: 50 , name: "바이너리 데이터 로드")]
+#endif
         private void RuntimeDataLoadTest()
         {
             RuntimeDataLoader.LoadFromBinary();
         }
 
+#if ODIN_INSPECTOR
         [ButtonGroup("LOAD")]
         [Button(buttonSize: 50 , name: "어드레서블 데이터 로드")]
+#endif
         private void AddressableLoad()
         {
             RuntimeDataLoader.LoadFromAddressable();
         }
 
+#if ODIN_INSPECTOR
         [OnInspectorGUI] private void Space3() { GUILayout.Space(20); }
         [ButtonGroup("SAVE")]
         [Button(buttonSize: 50 , name: "바이너리 저장")]
+#endif
         private void SaveToBinary()
         {
             EditorDataLoader.SaveToBinary();
         }
 
+#if ODIN_INSPECTOR
         [OnInspectorGUI] private void Space4() { GUILayout.Space(20); }
         [ButtonGroup("PlayerPrefab")]
         [Button(buttonSize: 50 , name: "Player Prefab 초기화")]
+#endif
         private void ClearPlayerPrefab()
         {
             PlayerPrefs.DeleteAll();

@@ -11,7 +11,6 @@ using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using O2un.Core.Utils;
 using O2un.Data;
-using Sirenix.Utilities;
 using UnityEditor;
 using UnityEngine;
 
@@ -228,11 +227,11 @@ namespace O2un.Core.Excel
         {
             // 임시 파일 제외 xls파일과 xlsx 파일모두
             var paths = GetAllFileFromPath(DataConfig.Instance._dataPath);
-            paths.ForEach((s) =>
+            foreach (var s in paths)
             {
                 CreateScriptForData(s);
                 LogHelper.Dev($"{s}데이터 생성 완료");
-            });
+            }
 
             RefreshExcelList(true);
         }
@@ -250,10 +249,10 @@ namespace O2un.Core.Excel
             DataConfig.Instance.Clear();
 
             var paths = GetAllFileFromPath(DataConfig.Instance._dataPath);
-            paths.ForEach((s) =>
+            foreach (var s in paths)
             {
                 RefreshExcelList(s);
-            });
+            }
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();

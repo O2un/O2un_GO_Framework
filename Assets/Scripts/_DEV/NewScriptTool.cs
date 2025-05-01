@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using O2un.Core.Utils;
+using UnityEditor;
+using UnityEngine;
+
+#if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
-using UnityEditor;
-using UnityEngine;
+#endif
 
+#if ODIN_INSPECTOR
 public class PreviewScript : ScriptableObject
 {
     public string fileName = "NewScript";
@@ -20,6 +24,9 @@ public class PreviewScript : ScriptableObject
 }
 
 public class NewScriptTool : OdinMenuEditorWindow
+#else
+public class NewScriptTool : EditorWindow
+#endif
 {
     public static readonly string CLASSNAME = "#SCRIPTNAME#";
     static List<TextAsset> scriptFileAssets = new();
@@ -42,7 +49,11 @@ public class NewScriptTool : OdinMenuEditorWindow
 
         var window = CreateInstance<NewScriptTool>();
         window.ShowUtility();
+#if ODIN_INSPECTOR
         window.position = GUIHelper.GetEditorWindowRect().AlignCenter(800, 500);
+#else
+        window.position = new Rect(0, 0, 800, 500);
+#endif
         window.titleContent = new GUIContent(path);
         window.targetFolder = path.Trim('/');
 
@@ -52,7 +63,7 @@ public class NewScriptTool : OdinMenuEditorWindow
         }
     }
 
-
+#if ODIN_INSPECTOR
     private PreviewScript previewObject;
     private Vector2 scroll;
 
@@ -122,9 +133,16 @@ public class NewScriptTool : OdinMenuEditorWindow
             }
         }
     }
+#else
+    private void OnGUI()
+    {
+        EditorGUILayout.HelpBox("Odin Inspector가 필요합니다.", MessageType.Warning);
+    }
+#endif
 
     private void CreateAsset()
     {
+#if ODIN_INSPECTOR
         var t = this.SelectedType;
         if (t == null)
         {
@@ -142,6 +160,7 @@ public class NewScriptTool : OdinMenuEditorWindow
 
         AssetDatabase.Refresh();
         EditorApplication.delayCall += this.Close;
+#endif
     }
 } 
 #endif

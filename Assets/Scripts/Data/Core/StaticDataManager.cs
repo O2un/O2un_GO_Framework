@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using GameCommonTypes;
 using O2un.Core.Excel;
 using O2un.Data.Binary;
-using Sirenix.Utilities;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -127,13 +126,14 @@ namespace O2un.Data
             using(var bw = BinaryHelper.SaveToBinary(BINARYPATH+dataType.Name+SUFFIX))
             {
                 bw.Write(DataList.Count);
-                DataList.ForEach((d)=>
+                foreach (var d in DataList)
                 {
                     bw.Write(d.Key);
-                    fieldinfos.ForEach((f)=>{
+                    foreach (var f in fieldinfos)
+                    {
                         bw.Write(f.GetValue(d.Value));
-                    });
-                });
+                    }
+                }
             }
             #endif
         }
@@ -180,10 +180,10 @@ namespace O2un.Data
             {
                 T newData = new T();
                 newData.SetKey(br.Read<UniqueKey64>());
-                fieldinfos.ForEach((f) =>
+                foreach (var f in fieldinfos)
                 {
                     f.SetValue(newData, br.Read(f.FieldType));
-                });
+                }
 
                 loadDictionary.Add(newData.Key, newData);
             }
@@ -195,10 +195,10 @@ namespace O2un.Data
 
         public void Set()
         {
-            DataList.ForEach((data) =>
+            foreach (var data in DataList)
             {
                 data.Value.Set();
-            });
+            }
 
             SetXXX();
         }
@@ -207,10 +207,10 @@ namespace O2un.Data
         
         public void Link()
         {
-            DataList.ForEach((data) =>
+            foreach (var data in DataList)
             {
                 data.Value.Link();
-            });
+            }
 
             LinkXXX();
         }

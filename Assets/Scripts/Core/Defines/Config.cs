@@ -1,6 +1,11 @@
+using UnityEngine;
+using System;
+
+
+#if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
-using UnityEngine;
+#endif
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -8,13 +13,25 @@ using UnityEditor;
 
 namespace O2un.Config
 {
+#if ODIN_INSPECTOR
     public class GlobalConfig : GlobalConfigAttribute
     {
         public GlobalConfig() : base("Config") {}
     }
-
-    public abstract class ConfigHelper<T> : SerializedScriptableObject where T : ConfigHelper<T>, new()
+#else
+    public class GlobalConfig : Attribute
     {
+
+    }
+#endif
+
+#if ODIN_INSPECTOR
+    public abstract class ConfigHelper<T> : SerializedScriptableObject where T : ConfigHelper<T>, new()
+#else
+    public abstract class ConfigHelper<T> : ScriptableObject where T : ConfigHelper<T>, new()
+#endif
+    {
+#if ODIN_INSPECTOR
         private static GlobalConfigAttribute configAttribute;
         public static GlobalConfigAttribute ConfigAttribute
         {
@@ -32,7 +49,7 @@ namespace O2un.Config
                 return configAttribute;
             }
         }
-
+#endif
         private static T _instance;
         public static T Instance
         {
@@ -40,7 +57,11 @@ namespace O2un.Config
             {
                 if(null == _instance)
                 {
+#if ODIN_INSPECTOR
                     string path = ConfigAttribute.AssetPath + typeof(T).Name;
+#else
+                    string path = typeof(T).Name;
+#endif
                     _instance = Resources.Load<T>(path);
                     if(null == _instance)
                     {
@@ -68,7 +89,11 @@ namespace O2un.Config
                 var instance = Instance;
             }
 
+#if ODIN_INSPECTOR
             string path = ConfigAttribute.AssetPath + typeof(T).Name;
+#else
+            string path = typeof(T).Name;
+#endif
             return "Assets/Resources/" + path + ".asset";
         }
     }
