@@ -7,7 +7,7 @@ namespace O2un.Core.Utils
     {
         static private LogManager _instance;
         private LogManager() {}
-        public static LogManager Instance { get { return _instance ?? (_instance = new()); } }
+        public static LogManager Instance => _instance ??= new();
         
         public void LogToEditor(LogHelper.LogLevel type, string str)
         {

@@ -16,7 +16,7 @@ namespace O2un.Core.Excel
         public int _cellIndex;
         public bool _isList;
 
-        public string ValueName {get{return $"_{_propertyName.ToLower()}";}}
+        public string ValueName => $"_{_propertyName.ToLower()}";
     }
 
     public class EnumInfo

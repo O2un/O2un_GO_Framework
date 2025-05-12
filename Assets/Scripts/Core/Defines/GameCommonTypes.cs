@@ -38,9 +38,9 @@ namespace GameCommonTypes
         #endregion
 
         #region Getter
-        public uint Upper { get {return _upper;} }
-        public uint Lower { get{return _lower;} }
-        public ulong Raw { get{return _raw;}}
+        public uint Upper => _upper;
+        public uint Lower => _lower;
+        public ulong Raw => _raw;
         public override string ToString()
         {
             return $"({_upper},{_lower} : row{_raw})";
@@ -205,9 +205,9 @@ namespace GameCommonTypes
         #endregion
 
         #region Getter
-        public ushort Upper { get {return _upper;} }
-        public ushort Lower { get{return _lower;} }
-        public uint Raw { get{return _raw;}}
+        public ushort Upper => _upper;
+        public ushort Lower => _lower;
+        public uint Raw => _raw;
 
         public override string ToString()
         {
