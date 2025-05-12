@@ -5,6 +5,18 @@ using UnityEngine;
 
 namespace GameCommonTypes
 {
+    [Flags]
+    public enum ActorType : uint
+    {
+        Actor = 0,
+        CharacterActor = 1 << 1,
+        PlayerActor = 1 << 2,
+
+
+        AllActorType = 0xffffffff,
+    }
+
+
     [System.Runtime.InteropServices.StructLayout(LayoutKind.Explicit), System.Serializable]
     public readonly struct UniqueKey64 : IComparable, IConvertible, IComparable<UniqueKey64>, IEquatable<UniqueKey64>
     {

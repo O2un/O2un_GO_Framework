@@ -1,6 +1,8 @@
 using UnityEngine;
 using System;
 using System.Linq;
+using Cysharp.Threading.Tasks;
+
 
 
 #if UNITY_EDITOR
@@ -38,6 +40,12 @@ namespace O2un.Core.Utils
         public static int IndexOfEnd(this string str, string find)
         {
             return str.IndexOf(find) + find.Length;
+        }
+
+        private static readonly int GLOBAL_DELAY_FRAME = 2;
+        public static UniTask DelayFrameAction(Action action)
+        {
+            return UniTask.DelayFrame(GLOBAL_DELAY_FRAME).ContinueWith(() => { action?.Invoke(); });
         }
     }
 }

@@ -14,6 +14,8 @@
 
 ## 🛠️ 사용됐거나 사용을 추천하는 3rd Party 라이브러리
 이 프로젝트는 다음과 같은 3rd Party 라이브러리를 활용하고 있습니다.
+프로그램 실행시 에러를 방지하기위해 아래 서드파티 패키지를 먼저 설치 완료하고 프로젝트를 다운받는것을 추천합니다.
+유로 라이브러리는 최대한 Define Symbol로 분기해두었으나 빼먹은곳이 있을 수 있습니다.
 
 무료 라이브러리
 1. **[Unitask](https://github.com/Cysharp/UniTask)** → 비동기 프로그래밍을 위한 최적화된 Task 라이브러리
@@ -28,6 +30,7 @@
 10. **[Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)** → JSON 직렬화 및 역직렬화를 위한 라이브러리
 10. **[System.Text.Json](https://www.nuget.org/packages/System.Text.Json/)** → JSON 직렬화 및 역직렬화를 위한 라이브러리
 12. **[NPOI](https://github.com/nissl-lab/npoi)** → Excel 파일의 읽기 및 쓰기를 지원하는 .NET 라이브러리
+13. **[NetcodeForGameObject](https://docs-multiplayer.unity3d.com/netcode/current/about/) → 네트워크 프레임워크 **
 
 
 유료 라이브러리
