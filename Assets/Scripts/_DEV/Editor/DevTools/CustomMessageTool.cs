@@ -10,7 +10,7 @@ using Sirenix.OdinInspector;
 
 public class CustomMessageTool
 {
-    string cspath = Application.dataPath + "/Scripts/Core/Network/Netcode/CustomMessage/CustomMessageManager.cs";
+    string cspath = Application.dataPath + "/Scripts/Network/Netcode/CustomMessage/CustomMessageManager.cs";
     string VALUEPREFIX = "//#STARTLIST";
     string VALUESUFFIX = "//#ENDLIST";
 

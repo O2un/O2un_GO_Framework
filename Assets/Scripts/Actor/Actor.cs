@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace O2un.Core
 {
-    public class Actor : SafeNetworkBehaviour
+    public abstract class Actor : SafeNetworkBehaviour
     {
         private ActorType _actorType;
         public bool Is(ActorType actorType) => _actorType.HasFlag(actorType);
