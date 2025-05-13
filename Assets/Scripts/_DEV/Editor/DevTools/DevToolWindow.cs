@@ -40,7 +40,8 @@ public class DevToolWindow : EditorWindow
         tree.AddAssetAtPath("Tools/Data List", DataConfig.Instance.GetPath());
         tree.Add("Tools/Data Tool", new DataTool());
         tree.AddAssetAtPath("Tools/Enum Tool", EnumTool.Instance.GetPath());
-        //tree.Add("Tools/Navigation Tool", new NaviTool());
+        tree.Add("Tools/Custom Network Message", new CustomMessageTool());
+
         return tree;
     }
 #else

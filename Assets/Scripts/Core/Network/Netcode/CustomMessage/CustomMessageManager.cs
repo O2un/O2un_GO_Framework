@@ -21,11 +21,11 @@ namespace O2un.Network
 
         private Dictionary<PayloadType, ICustomNetworkMessageDispatcher> _messageDispachers {get;} = new()
         {
-            // NOTE _DEV_CustomMessageManager 를 통해 자동 생성되는 코드입니다 수정하지 마세요
+            // NOTE _DEV_CustomMessageTool 를 통해 자동 생성되는 코드입니다 수정하지 마세요
             //#STARTLIST
             {PayloadType.Nak, new NakDispatcher()},
   //#ENDLIST
-            // NOTE _DEV_CustomMessageManager 를 통해 자동 생성되는 코드입니다 수정하지 마세요
+            // NOTE _DEV_CustomMessageTool 를 통해 자동 생성되는 코드입니다 수정하지 마세요
         };
 
         public bool GetDispatcher(PayloadType type, out ICustomNetworkMessageDispatcher dispatcher)

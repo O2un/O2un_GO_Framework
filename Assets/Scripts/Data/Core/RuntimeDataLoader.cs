@@ -41,7 +41,7 @@ namespace O2un.Data
 
         private static async void Link()
         {
-            // 데이터가 로드되는 타이밍에는 PlayerLoop가 없으므로 Unitask 대신 Task를 사용합니다.
+            //NOTE 데이터가 로드되는 타이밍에는 PlayerLoop가 없으므로 Unitask 대신 Task를 사용합니다.
             await Task.WhenAll(
 				TestStaticDataManager.Instance.WaitForLoaded() 
 

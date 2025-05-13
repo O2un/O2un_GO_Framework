@@ -2,6 +2,10 @@ using UnityEngine;
 using System;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using Sirenix.Utilities;
+using System.Collections.Generic;
+
+
 
 
 
@@ -46,6 +50,15 @@ namespace O2un.Core.Utils
         public static UniTask DelayFrameAction(Action action)
         {
             return UniTask.DelayFrame(GLOBAL_DELAY_FRAME).ContinueWith(() => { action?.Invoke(); });
+        }
+
+        public static IEnumerable<Type> GetTypes(Func<Type, bool> predicate)
+        {
+#if ODIN_INSPECTOR
+            return AssemblyUtilities.GetTypes(AssemblyCategory.Scripts).Where(predicate);
+#else
+            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(predicate);
+#endif
         }
     }
 }

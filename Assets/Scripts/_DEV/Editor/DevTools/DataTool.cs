@@ -6,6 +6,8 @@ using System.Text;
 using O2un.Core.Excel;
 using UnityEditor;
 using UnityEngine;
+using O2un.Core.Utils;
+
 
 #if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
@@ -48,14 +50,7 @@ namespace O2un.Data
                 template = sr.ReadToEnd();
             }
             
-#if ODIN_INSPECTOR
-            var temp = AssemblyUtilities.GetTypes(AssemblyCategory.Scripts)
-                        .Where(t => t.IsClass && typeof(IStaticDataManager).IsAssignableFrom(t) && !t.IsAbstract);
-#else
-            var temp = AppDomain.CurrentDomain.GetAssemblies()
-                        .SelectMany(assembly => assembly.GetTypes())
-                        .Where(t => t.IsClass && typeof(IStaticDataManager).IsAssignableFrom(t) && !t.IsAbstract);
-#endif
+            var temp = CommonUtils.GetTypes(t => t.IsClass && typeof(IStaticDataManager).IsAssignableFrom(t) && !t.IsAbstract);
     
             StringBuilder values = new();
             StringBuilder values2 = new();
@@ -94,14 +89,7 @@ namespace O2un.Data
                 template = sr.ReadToEnd();
             }
             
-#if ODIN_INSPECTOR
-            var temp = AssemblyUtilities.GetTypes(AssemblyCategory.Scripts)
-                        .Where(t => t.IsClass && typeof(IStaticDataManager).IsAssignableFrom(t) && !t.IsAbstract);
-#else
-            var temp = AppDomain.CurrentDomain.GetAssemblies()
-                        .SelectMany(assembly => assembly.GetTypes())
-                        .Where(t => t.IsClass && typeof(IStaticDataManager).IsAssignableFrom(t) && !t.IsAbstract);
-#endif
+            var temp = CommonUtils.GetTypes(t => t.IsClass && typeof(IStaticDataManager).IsAssignableFrom(t) && !t.IsAbstract);
     
             StringBuilder values = new();
             StringBuilder values2 = new();
