@@ -30,7 +30,8 @@
 10. **[Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)** → JSON 직렬화 및 역직렬화를 위한 라이브러리
 10. **[System.Text.Json](https://www.nuget.org/packages/System.Text.Json/)** → JSON 직렬화 및 역직렬화를 위한 라이브러리
 12. **[NPOI](https://github.com/nissl-lab/npoi)** → Excel 파일의 읽기 및 쓰기를 지원하는 .NET 라이브러리
-13. **[NetcodeForGameObject](https://docs-multiplayer.unity3d.com/netcode/current/about/) → 네트워크 프레임워크 **
+13. **[NetcodeForGameObject](https://docs-multiplayer.unity3d.com/netcode/current/about/)** → 네트워크 프레임워크
+14. **[xNode](https://github.com/Siccity/xNode)** → 게임디자인 작업 요소를 GUI 툴로 쉽게 만들기위해 사용함
 
 
 유료 라이브러리
