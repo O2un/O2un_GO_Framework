@@ -1,0 +1,223 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8843794207979287307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcdfae5e120250947832940c64c39baa, type: 3}
+  m_Name: Root
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -456, y: -136}
+  ports:
+    keys:
+    - _exit
+    values:
+    - _fieldName: _exit
+      _node: {fileID: -8843794207979287307}
+      _typeQualifiedName: O2un.Node.StateMachine.Port, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: _enter
+        node: {fileID: 265055710052201039}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+--- !u!114 &-3208232044915811679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc3cd3abe28e20479d7c4e8b5720d02, type: 3}
+  m_Name: Log
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 184, y: -216}
+  ports:
+    keys:
+    - _enter
+    values:
+    - _fieldName: _enter
+      _node: {fileID: -3208232044915811679}
+      _typeQualifiedName: O2un.Node.StateMachine.Port, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: _exit 0
+        node: {fileID: 265055710052201039}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _log: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f4ef8a5753d33246b45b0f906c63817, type: 3}
+  m_Name: New Test State Machine Graph
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: 265055710052201039}
+  - {fileID: -3208232044915811679}
+  - {fileID: 7831802635981124591}
+  - {fileID: 4208858956345757698}
+  - {fileID: -8843794207979287307}
+  _root: {fileID: -8843794207979287307}
+--- !u!114 &265055710052201039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89489675c84faca4ba4491ce91accaed, type: 3}
+  m_Name: Sequencer
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -168, y: -184}
+  ports:
+    keys:
+    - _enter
+    - _exit
+    - _exit 0
+    - _exit 1
+    - _exit 2
+    values:
+    - _fieldName: _enter
+      _node: {fileID: 265055710052201039}
+      _typeQualifiedName: O2un.Node.StateMachine.Port, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: _exit
+        node: {fileID: -8843794207979287307}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _exit
+      _node: {fileID: 265055710052201039}
+      _typeQualifiedName: O2un.Node.StateMachine.Port, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _exit 0
+      _node: {fileID: 265055710052201039}
+      _typeQualifiedName: O2un.Node.StateMachine.Port, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: _enter
+        node: {fileID: -3208232044915811679}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: _exit 1
+      _node: {fileID: 265055710052201039}
+      _typeQualifiedName: O2un.Node.StateMachine.Port, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: _enter
+        node: {fileID: 7831802635981124591}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: _exit 2
+      _node: {fileID: 265055710052201039}
+      _typeQualifiedName: O2un.Node.StateMachine.Port, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: _enter
+        node: {fileID: 4208858956345757698}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+--- !u!114 &4208858956345757698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc3cd3abe28e20479d7c4e8b5720d02, type: 3}
+  m_Name: Log
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 184, y: 40}
+  ports:
+    keys:
+    - _enter
+    values:
+    - _fieldName: _enter
+      _node: {fileID: 4208858956345757698}
+      _typeQualifiedName: O2un.Node.StateMachine.Port, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: _exit 2
+        node: {fileID: 265055710052201039}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _log: 3
+--- !u!114 &7831802635981124591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc3cd3abe28e20479d7c4e8b5720d02, type: 3}
+  m_Name: Log
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 168, y: -88}
+  ports:
+    keys:
+    - _enter
+    values:
+    - _fieldName: _enter
+      _node: {fileID: 7831802635981124591}
+      _typeQualifiedName: O2un.Node.StateMachine.Port, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: _exit 1
+        node: {fileID: 265055710052201039}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _log: 2

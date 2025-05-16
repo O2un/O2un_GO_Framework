@@ -14,12 +14,23 @@ namespace O2un.Node.StateMachine
 	}
 
 	[Serializable]
-	public class EmptyNode { }
-		
-	public abstract class StateNode : XNode.Node 
+	public class Port { }
+
+    public class FailNode : StateNode
+    {
+        protected override void OnStart() {}
+        protected override void OnStop() {}
+        protected override NodeState OnUpdate()
+        {
+			return NodeState.Failure;
+        }
+    }
+
+    public abstract class StateNode : XNode.Node 
 	{
-		[Input] public EmptyNode _enter;
-		[Output] public EmptyNode _exit;
+		// NOTE Input 과 Output Port의 이름은 _enter와 _exit로 고정
+		// [Input] public Port _enter;
+		// [Output] public Port _exit;
 
 		protected override void Init() {
 			base.Init();
@@ -33,6 +44,9 @@ namespace O2un.Node.StateMachine
         protected abstract void OnStart();
         protected abstract void OnStop();
         protected abstract NodeState OnUpdate();
+
+		private FailNode _failNode;
+		private FailNode FAIL => _failNode ??= new();
 
 		public NodeState Update()
 		{
@@ -53,22 +67,33 @@ namespace O2un.Node.StateMachine
             return State;
 		}
 
-		public StateNode GetNextNode() {
-			StateMachineGraph fmGraph = graph as StateMachineGraph;
-
-			if (fmGraph._current != this) {
-				Debug.LogWarning("Node isn't active");
-				return null;
+		protected List<StateNode> GetEixtList()
+		{
+			List<StateNode> list = new();
+			foreach(var port in DynamicOutputs)
+			{
+				if(port.Connection.node is StateNode node)
+				{
+					list.Add(node);
+				}
 			}
-
-			NodePort exitPort = GetOutputPort("exit");
-
-			if (!exitPort.IsConnected) {
-				Debug.LogWarning("Node isn't connected");
-				return null;
-			}
-
-			return exitPort.Connection.node as StateNode;
+			return list;
 		}
-	}
+
+		protected StateNode GetExitNode()
+		{
+			var exit = GetOutputPort("_exit");
+			if(false ==  exit.IsConnected)
+			{
+				return FAIL;
+			}
+
+			return exit.Connection.node as StateNode;
+		}
+
+        public override object GetValue(NodePort port)
+        {
+			return null;
+        }
+    }
 }
