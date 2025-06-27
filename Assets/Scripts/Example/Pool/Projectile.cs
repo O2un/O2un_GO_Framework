@@ -16,8 +16,7 @@ public class Projectile : IPoolingObject
     protected override void OnGetXXX()
     {
         transform.position = Vector3.zero;
-
-        UniTask.Delay(1000).ContinueWith( () => gameObject.SetActive(false)).Forget();
+        DelayCall(1, () => gameObject.SetActive(false));
     }
 
     protected override void OnReleaseXXX()
