@@ -17,7 +17,7 @@ public class PoolingManager
 
     public T Get<T>(T origin) where T : IPoolingObject
     {
-        var type = typeof(T);
+        var type = origin.GetType();
         if (false == pool.TryGetValue(type, out var p))
         {
             p = new ObjectPool<IPoolingObject>(
@@ -43,7 +43,7 @@ public class PoolingManager
 
     public void Return<T>(T obj) where T : IPoolingObject
     {
-        if(pool.TryGetValue(typeof(T), out var p))
+        if(pool.TryGetValue(obj.GetType(), out var p))
         {
             p.Release(obj);
         }
