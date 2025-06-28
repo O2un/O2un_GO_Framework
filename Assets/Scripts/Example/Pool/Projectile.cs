@@ -5,7 +5,7 @@ public class Projectile : IPoolingObject
 {
     public void Update()
     {
-        transform.Translate(transform.forward * 5 * Time.deltaTime);
+        transform.Translate(Vector3.forward * 5 * Time.deltaTime);
     }
 
     protected override void OnDestroyXXX()
